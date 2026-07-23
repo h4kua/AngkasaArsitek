@@ -36,6 +36,10 @@ yarn-error.log*
 # vercel
 .vercel
 
+# agent tooling / reference assets, not project source
+/.claude/
+/video/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
