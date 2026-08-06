@@ -61,6 +61,10 @@ export default function ProjectImage({
     );
   }
 
+  // Fade is 300ms, not 700ms: it stacks on top of the network fetch, so a long
+  // transition reads as the image being slow rather than as polish. Starting at
+  // opacity-35 rather than 0 also stops the frame sitting visibly empty while
+  // the last of the image decodes.
   return (
     <Image
       ref={captureRef}
@@ -72,8 +76,8 @@ export default function ProjectImage({
       priority={priority}
       onLoad={() => setLoaded(true)}
       onError={() => setFailed(true)}
-      className={`object-cover transition-opacity duration-700 ease-out ${
-        loaded ? "opacity-100" : "opacity-0"
+      className={`object-cover transition-opacity duration-300 ease-out ${
+        loaded ? "opacity-100" : "opacity-35"
       } ${className}`}
     />
   );
