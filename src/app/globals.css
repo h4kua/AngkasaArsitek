@@ -1,14 +1,23 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #0e0f11;
-  --color-surface: #17181b;
-  --color-surface-raised: #1e2024;
-  --color-line: #2a2b2f;
-  --color-paper: #f3f2ee;
-  --color-muted: #9b9892;
-  --color-accent: #3d63ff;
-  --color-accent-dim: #24408f;
+  /* Warm editorial palette -- ivory/sand/stone instead of paper-on-ink,
+     muted brass instead of a digital blue accent. Every text/background
+     pairing below is checked against WCAG AA (4.5:1 for body text). */
+  --color-ink: #f6f1e9;
+  --color-surface: #efe8da;
+  --color-surface-raised: #fbf8f2;
+  --color-line: #c9baa0;
+  --color-paper: #2a2520;
+  --color-muted: #6b6255;
+  --color-accent: #8c6836;
+  --color-accent-dim: #5e4623;
+  --color-on-accent: #fbf8f2;
+
+  /* Secondary material/nature tones for section-level accents. */
+  --color-forest: #3a4a34;
+  --color-sage: #9caa8c;
+  --color-sky: #c9d6dc;
 }
 
 @theme inline {
@@ -20,8 +29,12 @@
   --color-muted: var(--color-muted);
   --color-accent: var(--color-accent);
   --color-accent-dim: var(--color-accent-dim);
+  --color-on-accent: var(--color-on-accent);
+  --color-forest: var(--color-forest);
+  --color-sage: var(--color-sage);
+  --color-sky: var(--color-sky);
 
-  --font-display: var(--font-archivo);
+  --font-display: var(--font-fraunces);
   --font-sans: var(--font-jakarta);
   --font-mono: var(--font-jetbrains);
 
@@ -30,18 +43,27 @@
 
 html {
   scroll-behavior: smooth;
-  color-scheme: dark;
+  color-scheme: light;
+  /* Must sit on the root as well: scroll width is resolved here, so clipping
+     only on <body> leaves the document itself horizontally scrollable. */
+  overflow-x: clip;
 }
 
 body {
   background: var(--color-ink);
   color: var(--color-paper);
   font-family: var(--font-sans);
+
+  /* Reveal's entrance offsets (x: ±56px) push content past the container
+     mid-animation, which can flash a horizontal scrollbar on narrow
+     viewports. `clip` rather than `hidden` on purpose: `hidden` would turn
+     body into a scroll container and break the sticky Nav. */
+  overflow-x: clip;
 }
 
 ::selection {
   background: var(--color-accent);
-  color: var(--color-paper);
+  color: var(--color-on-accent);
 }
 
 :focus-visible {

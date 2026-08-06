@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Archivo, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
+import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
 import "./globals.css";
 
-const archivo = Archivo({
-  variable: "--font-archivo",
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  style: ["normal", "italic"],
 });
 
 const jakarta = Plus_Jakarta_Sans({
@@ -24,7 +25,7 @@ const jetbrains = JetBrains_Mono({
 
 const siteName = "Angkasa Architects";
 const siteDescription =
-  "Angkasa Architects merancang rumah, komersial, dan bangunan publik di Pekanbaru sejak 2015. Kami menciptakan ruang untuk tempat yang lebih baik.";
+  "Angkasa Architects has designed houses, commercial and public buildings from Pekanbaru since 2015. We create space for a better place.";
 
 export const metadata: Metadata = {
   title: {
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     title: `${siteName} — Biro Arsitektur Pekanbaru`,
     description: siteDescription,
     siteName,
-    locale: "id_ID",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
@@ -53,11 +54,11 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="id"
+      lang="en"
       data-scroll-behavior="smooth"
-      className={`${archivo.variable} ${jakarta.variable} ${jetbrains.variable} h-full antialiased`}
+      className={`${fraunces.variable} ${jakarta.variable} ${jetbrains.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-ink text-paper">
+      <body id="top" className="min-h-full flex flex-col bg-ink text-paper">
         <div className="grain-overlay pointer-events-none fixed inset-0 z-[60]" aria-hidden />
         <Nav />
         <main className="flex-1">{children}</main>

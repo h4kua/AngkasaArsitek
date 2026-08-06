@@ -16,7 +16,7 @@ export default function ClosingCta({ title }: ClosingCtaProps) {
             {title}
           </h2>
           <div className="mt-8 flex justify-center">
-            <Button href="/kontak">Hubungi Kami</Button>
+            <Button href="/kontak">Contact Us</Button>
           </div>
         </Reveal>
       </div>

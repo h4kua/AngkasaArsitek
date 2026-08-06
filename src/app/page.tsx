@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
-import Button from "@/components/ui/Button";
 import ClosingCta from "@/components/ui/ClosingCta";
 import ProjectCard from "@/components/ui/ProjectCard";
 import ProjectImage from "@/components/ui/ProjectImage";
@@ -8,7 +7,8 @@ import Reveal from "@/components/ui/Reveal";
 import SectionIntro from "@/components/ui/SectionIntro";
 import StackSection from "@/components/ui/StackSection";
 import StatStrip from "@/components/ui/StatStrip";
-import HeroHouse from "@/components/three/HeroHouse";
+import Button from "@/components/ui/Button";
+import Hero from "@/components/ui/Hero";
 import { company, founders, projects, services, stats } from "@/lib/data";
 
 const featuredSlugs = [
@@ -28,10 +28,10 @@ const [heroProject, ...gridProjects] = featuredProjects;
 export default function Home() {
   return (
     <>
-      <HeroHouse />
+      <Hero />
 
       {/* Stats */}
-      <section className="mx-auto max-w-[1400px] px-6 pb-28 lg:px-10">
+      <section id="site-content" className="mx-auto max-w-[1400px] px-6 pb-28 pt-20 lg:px-10">
         <Reveal direction="up">
           <StatStrip stats={stats} />
         </Reveal>
@@ -42,9 +42,9 @@ export default function Home() {
         <Reveal direction="left">
           <SectionIntro
             align="left"
-            label="— Layanan"
-            title="Enam disiplin, satu cara berpikir."
-            body="Dari rumah tinggal hingga fasilitas publik, setiap proyek kami mulai dari cara ruang itu akan benar-benar dipakai."
+            label="Services"
+            title="Six disciplines we work across."
+            body="From private homes to public facilities. The starting point is always the same: how the space will actually be used day to day."
           />
         </Reveal>
 
@@ -82,14 +82,14 @@ export default function Home() {
         <Reveal direction="left">
           <SectionIntro
             align="left"
-            label="— Karya"
-            title="Karya pilihan."
+            label="Projects"
+            title="Selected work."
             action={
               <Link
                 href="/karya"
                 className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-accent"
               >
-                Lihat semua karya
+                View all projects
                 <ArrowUpRight size={16} weight="bold" />
               </Link>
             }
@@ -105,10 +105,12 @@ export default function Home() {
             >
               <div className="relative aspect-[16/7] w-full overflow-hidden bg-surface">
                 <ProjectImage
+                  src={heroProject.images[0]}
                   seed={heroProject.imageSeed}
-                  alt={`${heroProject.name}, ${heroProject.category} di ${heroProject.location}`}
+                  alt={`${heroProject.name}, ${heroProject.category} in ${heroProject.location}`}
                   width={1600}
                   height={700}
+                  sizes="(min-width: 1440px) 1360px, (min-width: 1024px) calc(100vw - 80px), calc(100vw - 48px)"
                   priority
                   className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
                 />
@@ -170,17 +172,19 @@ export default function Home() {
                     className="relative aspect-square overflow-hidden bg-surface"
                   >
                     <ProjectImage
+                      src={p.images[0]}
                       seed={p.imageSeed}
                       alt={p.name}
                       width={600}
                       height={600}
+                      sizes="(min-width: 1024px) 340px, 45vw"
                       className="h-full w-full transition-transform duration-700 ease-out hover:scale-105"
                     />
                   </div>
                 ))}
               </div>
               <div className="absolute -bottom-4 -right-4 border border-line bg-ink px-5 py-4 lg:-bottom-6 lg:-right-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Berdiri sejak</p>
+                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Founded</p>
                 <p className="font-display text-3xl font-extrabold tracking-tight text-paper">
                   {company.founded}
                 </p>
@@ -189,11 +193,14 @@ export default function Home() {
 
             {/* Text column */}
             <Reveal direction="right" className="flex flex-col justify-center">
-              <p className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
-                — Tentang Kami
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                Didirikan oleh dua arsitek, satu visi.
+              <div className="flex items-center gap-3">
+                <span className="h-px w-9 bg-accent" aria-hidden />
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                  About Us
+                </p>
+              </div>
+              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+                Two architects, one studio.
               </h2>
               <blockquote className="mt-6 border-l-2 border-accent pl-5">
                 <p className="font-display text-lg italic leading-relaxed text-paper/80">
@@ -201,10 +208,12 @@ export default function Home() {
                 </p>
               </blockquote>
               <p className="mt-6 max-w-[55ch] text-base leading-relaxed text-muted">
-                Nama Angkasa merepresentasikan semangat terbang setinggi mungkin.{" "}
-                {founders[0].name.split(",")[0]} dan {founders[1].name} mendirikan
-                studio ini dengan satu keyakinan: setiap kota berhak atas bangunan
-                yang dirancang dengan sungguh-sungguh.
+                Jeffri brought years of experience from a Singapore-based
+                architecture firm; Indri came from heading development at a
+                Pekanbaru property company. They hold distinct views on design
+                aesthetics but, like yin and yang, they complement each other —
+                a pairing the studio credits for the unique, bold and
+                unexpected outcomes in its work since {company.founded}.
               </p>
               <div className="mt-4 flex flex-wrap gap-4">
                 {founders.map((f) => (
@@ -216,7 +225,7 @@ export default function Home() {
               </div>
               <div className="mt-8">
                 <Button href="/tentang" variant="ghost">
-                  Tentang Kami
+                  About Us
                 </Button>
               </div>
             </Reveal>
@@ -224,7 +233,7 @@ export default function Home() {
         </div>
       </StackSection>
 
-      <ClosingCta title="Mari wujudkan ruang Anda bersama kami." />
+      <ClosingCta title="Let us shape your space together." />
     </>
   );
 }

@@ -16,15 +16,15 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
     return Array.from(set);
   }, [projects]);
 
-  const [active, setActive] = useState<ProjectCategory | "Semua">("Semua");
+  const [active, setActive] = useState<ProjectCategory | "All">("All");
 
   const filtered =
-    active === "Semua" ? projects : projects.filter((p) => p.category === active);
+    active === "All" ? projects : projects.filter((p) => p.category === active);
 
   return (
     <div>
       <div className="flex flex-wrap justify-center gap-3">
-        {(["Semua", ...categories] as const).map((cat) => (
+        {(["All", ...categories] as const).map((cat) => (
           <button
             key={cat}
             type="button"

@@ -21,12 +21,15 @@ export default function SectionIntro({
   return (
     <div className={`${isLeft ? "" : "mx-auto max-w-2xl text-center"} ${className}`}>
       {label && (
-        <p className="mb-3 font-mono text-xs uppercase tracking-[0.18em] text-accent">
-          {label}
-        </p>
+        <div className={`mb-4 flex items-center gap-3 ${isLeft ? "" : "justify-center"}`}>
+          <span className="h-px w-9 bg-accent" aria-hidden />
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+            {label}
+          </p>
+        </div>
       )}
       <h2
-        className={`font-display text-3xl font-extrabold tracking-tight sm:text-4xl ${
+        className={`font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl ${
           isLeft ? "max-w-2xl" : ""
         }`}
       >
@@ -34,7 +37,7 @@ export default function SectionIntro({
       </h2>
       {body && (
         <p
-          className={`mt-4 text-base leading-relaxed text-muted ${
+          className={`mt-5 text-base leading-relaxed text-muted ${
             isLeft ? "max-w-[60ch]" : "mx-auto max-w-[60ch]"
           }`}
         >

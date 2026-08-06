@@ -19,7 +19,7 @@ export default function Button({
     "group inline-flex items-center gap-2 px-6 py-3.5 text-sm font-medium tracking-wide transition-all duration-300 whitespace-nowrap active:scale-[0.97]";
   const styles =
     variant === "primary"
-      ? "bg-accent text-paper shadow-[0_0_0_0_rgba(61,99,255,0)] hover:bg-accent-dim hover:shadow-[0_10px_32px_-8px_rgba(61,99,255,0.6)]"
+      ? "bg-accent text-on-accent shadow-[0_0_0_0_rgba(140,104,54,0)] hover:bg-accent-dim hover:shadow-[0_10px_32px_-8px_rgba(140,104,54,0.55)]"
       : "border border-line text-paper hover:border-accent hover:text-accent";
 
   return (
