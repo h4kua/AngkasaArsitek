@@ -56,7 +56,7 @@ export default function TentangPage() {
                 className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-line/70 bg-surface shadow-[0_24px_60px_-32px_rgba(42,37,32,0.4)]"
               >
                 <ProjectImage
-                  seed={founder.imageSeed}
+                  src={founder.image}
                   alt={founder.name}
                   width={800}
                   height={1000}
@@ -156,18 +156,25 @@ export default function TentangPage() {
                 Our Team
               </h2>
             </div>
-            <ul className="mt-8 border-t border-line/70">
+            <ul className="mt-8 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3">
               {team.map((member) => (
-                <li
-                  key={member.name}
-                  className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 border-b border-line/70 py-4"
-                >
-                  <span className="font-display text-base font-semibold tracking-tight">
+                <li key={member.name}>
+                  <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line/70 bg-surface-raised">
+                    <ProjectImage
+                      src={member.image}
+                      alt={member.name}
+                      width={1024}
+                      height={1024}
+                      sizes="(min-width: 1024px) 200px, (min-width: 640px) 22vw, 42vw"
+                      className="h-full w-full"
+                    />
+                  </div>
+                  <p className="mt-3 font-display text-sm font-semibold leading-snug tracking-tight">
                     {member.name}
-                  </span>
-                  <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
+                  </p>
+                  <p className="mt-0.5 font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
                     {member.role}
-                  </span>
+                  </p>
                 </li>
               ))}
             </ul>

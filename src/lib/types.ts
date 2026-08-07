@@ -86,13 +86,16 @@ export interface Founder {
   name: string;
   role: string;
   bio: string;
-  imageSeed: string;
+  /** Portrait from Angkasa's own media library. */
+  image: string;
   instagram: string;
 }
 
 export interface TeamMember {
   name: string;
   role: string;
+  /** Square portrait from Angkasa's own media library. */
+  image: string;
 }
 
 export interface Stat {

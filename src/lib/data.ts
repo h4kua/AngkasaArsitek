@@ -43,26 +43,50 @@ export const founders: Founder[] = [
     name: "Ar. Jeffri Angkasa, S.T., IAI.",
     role: "Principal & Co-Founder",
     bio: "Jeffri brought years of experience from a Singapore-based architecture firm into the studio he co-founded in 2015. His approach is structured and experimental in equal measure, working through mass, space function, environment, sunlight, air and materials — from large scale down to the smallest detail. Member of Ikatan Arsitek Indonesia (IAI).",
-    imageSeed: "angkasa-founder-jeffri",
+    image: `${CMS}/2025/01/Jeffri-Angkasa-1024x1024.png`,
     instagram: "@jeffriangkasa",
   },
   {
     name: "Ar. Indri Sisilia, S.T., IAI.",
     role: "Principal & Co-Founder",
     bio: "Indri's background as head of development at a Pekanbaru property company gives the studio its commercial instinct. She and Jeffri hold distinct views on design aesthetics but, like yin and yang, they complement each other — a pairing the studio credits for the unique, bold and unexpected outcomes in its work. Member of Ikatan Arsitek Indonesia (IAI).",
-    imageSeed: "angkasa-founder-indri",
+    image: `${CMS}/2025/01/Indri-Sisilia-1024x1024.png`,
     instagram: "@indri_kho_",
   },
 ];
 
 /** Studio roster as listed on the official About page. */
 export const team: TeamMember[] = [
-  { name: "Ar. Jeffri Angkasa, IAI.", role: "Principal" },
-  { name: "Ar. Indri Sisilia, IAI.", role: "Principal" },
-  { name: "Muhammad Kurniawan, S.T.", role: "Architect" },
-  { name: "Muhammad Zukhrufi Lutfi, S.T., M. Ars.", role: "Architect" },
-  { name: "Afif Eidwar, S.Ds.", role: "Designer" },
-  { name: "Vedita Tego Kuncoro, S.T.", role: "Architect" },
+  {
+    name: "Ar. Jeffri Angkasa, IAI.",
+    role: "Principal",
+    image: `${CMS}/2025/01/Jeffri-Angkasa-1024x1024.png`,
+  },
+  {
+    name: "Ar. Indri Sisilia, IAI.",
+    role: "Principal",
+    image: `${CMS}/2025/01/Indri-Sisilia-1024x1024.png`,
+  },
+  {
+    name: "Muhammad Kurniawan, S.T.",
+    role: "Architect",
+    image: `${CMS}/2025/01/Muhammad-kurniawan-1024x1024.png`,
+  },
+  {
+    name: "Muhammad Zukhrufi Lutfi, S.T., M. Ars.",
+    role: "Architect",
+    image: `${CMS}/2025/01/Zukhrufi-lutfhi-1024x1024.png`,
+  },
+  {
+    name: "Afif Eidwar, S.Ds.",
+    role: "Designer",
+    image: `${CMS}/2025/01/Afif-Eidwar-1024x1024.png`,
+  },
+  {
+    name: "Vedita Tego Kuncoro, S.T.",
+    role: "Architect",
+    image: `${CMS}/2025/01/Vedita-Tego-Kuncoro-1024x1024.png`,
+  },
 ];
 
 /** Client list exactly as published on the official About page. */
