@@ -12,15 +12,6 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "picsum.photos",
       },
-      {
-        // Angkasa's own WordPress media library — the source the official
-        // site serves project photography from. It publishes URLs as http://,
-        // which browsers block as mixed content, so URLs are rewritten to
-        // https (verified serving correctly) before reaching next/image.
-        protocol: "https",
-        hostname: "cms.angkasaarchitects.com",
-        pathname: "/wp-content/uploads/**",
-      },
     ],
   },
 };

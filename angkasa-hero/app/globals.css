@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #14171A;
+  --color-stone: #EDE7DA;
+  --color-gold: #C9A468;
+  --color-clay: #8C7A66;
+  --color-sage: #45543F;
+  --color-mist: #B9C4CC;
+  --scroll-progress: 0;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-stone: var(--color-stone);
+  --color-gold: var(--color-gold);
+  --color-clay: var(--color-clay);
+  --color-sage: var(--color-sage);
+  --color-mist: var(--color-mist);
+  --font-display: var(--font-syne);
+  --font-sans: var(--font-inter);
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-stone);
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* Visible keyboard focus everywhere — required, not optional. */
+:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 3px;
+}
+
+/* Slow Ken Burns drift for the fallback background. Only for users who have
+   NOT expressed a reduced-motion preference — see the (max) media guard.
+   The `animated` prop in ReducedMotionFallback gates this class to
+   full-tier users only; this media query is the second, independent guard
+   for anyone whose OS-level preference we should still respect. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-fallback-animated {
+    animation: hero-ken-burns 26s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes hero-ken-burns {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+/* Fades the left-column headline out as the scroll reaches the structural
+   grid beat (0.35), so it doesn't sit over the busier material reveal.
+   Driven by the --scroll-progress custom property set directly in
+   useScrollTimeline's onUpdate — no React re-render involved. */
+.hero-overlay-fade {
+  opacity: clamp(0, calc((0.35 - var(--scroll-progress, 0)) * 6), 1);
+  transition: opacity 0.1s linear;
+}

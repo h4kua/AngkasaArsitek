@@ -16,7 +16,12 @@ import type {
  * drift from the source of truth.
  */
 
-const CMS = "https://cms.angkasaarchitects.com/wp-content/uploads";
+// Angkasa's photography, mirrored into this repo. Served from our own origin
+// rather than the studio CMS: that host is intermittently slow, and Next's
+// image optimizer has a fixed 7s fetch timeout with no config option, so a
+// slow upstream response rendered the "image unavailable" placeholder to
+// whoever loaded a page first. Re-run scripts/sync-cms-images.mjs to refresh.
+const CMS = "/cms";
 
 export const company = {
   name: "Angkasa Architects",
