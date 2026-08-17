@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: "Services — Angkasa Architects",
   description:
     "Private housing, residential areas, villas and resorts, commercial complexes, master planning and architectural interiors — the six disciplines of Angkasa Architects, with process and deliverables.",
+  alternates: { canonical: "/layanan" },
 };
 
 export default function LayananPage() {
@@ -164,7 +165,10 @@ export default function LayananPage() {
         </div>
       </section>
 
-      <ClosingCta title="Tell us what you need to build." />
+      <ClosingCta
+        eyebrow="Ready when you are"
+        title="Tell us what you need to build."
+      />
     </>
   );
 }

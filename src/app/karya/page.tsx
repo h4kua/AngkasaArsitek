@@ -8,6 +8,7 @@ export const metadata: Metadata = {
   title: "Projects — Angkasa Architects",
   description:
     "Houses, residential areas, commercial and public buildings designed by Angkasa Architects across Indonesia.",
+  alternates: { canonical: "/karya" },
 };
 
 export default function KaryaPage() {
@@ -29,7 +30,7 @@ export default function KaryaPage() {
         <ProjectsGrid projects={projects} />
       </section>
 
-      <ClosingCta title="Your project could be next." />
+      <ClosingCta eyebrow="Your turn" title="Your project could be next." />
     </>
   );
 }

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Fraunces, Plus_Jakarta_Sans, JetBrains_Mono } from "next/font/google";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import { company } from "@/lib/data";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const fraunces = Fraunces({
@@ -30,11 +32,15 @@ const siteDescription =
 const siteTitle = `${siteName} — Architecture Studio in Pekanbaru`;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: siteTitle,
     template: `%s`,
   },
   description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: siteTitle,
     description: siteDescription,
@@ -43,10 +49,32 @@ export const metadata: Metadata = {
     type: "website",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: siteTitle,
     description: siteDescription,
   },
+};
+
+/**
+ * Every field mirrors `company` in lib/data.ts verbatim -- no business
+ * detail here is invented for the sake of richer structured data.
+ */
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  name: company.name,
+  description: siteDescription,
+  url: SITE_URL,
+  telephone: company.phones[0],
+  email: company.email,
+  foundingDate: String(company.founded),
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: company.address,
+    addressCountry: "ID",
+  },
+  areaServed: company.cities,
+  sameAs: [`https://www.instagram.com/${company.instagram.replace("@", "")}/`],
 };
 
 export default function RootLayout({
@@ -61,9 +89,23 @@ export default function RootLayout({
       className={`${fraunces.variable} ${jakarta.variable} ${jetbrains.variable} h-full antialiased`}
     >
       <body id="top" className="min-h-full flex flex-col bg-ink text-paper">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-accent focus:px-5 focus:py-2.5 focus:text-sm focus:font-medium focus:text-on-accent"
+        >
+          Skip to main content
+        </a>
         <div className="grain-overlay pointer-events-none fixed inset-0 z-[60]" aria-hidden />
         <Nav />
-        <main className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
       </body>
     </html>

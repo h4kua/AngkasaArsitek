@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Contact — Angkasa Architects",
   description:
     "Contact Angkasa Architects in Pekanbaru to discuss your private house, commercial or public building project.",
+  alternates: { canonical: "/kontak" },
 };
 
 const whatsappNumber = company.phones[0].replace(/[^0-9]/g, "");
@@ -64,6 +65,8 @@ export default function KontakPage() {
                   <li key={phone}>
                     <a
                       href={`https://wa.me/${phone.replace(/[^0-9]/g, "")}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex items-center gap-3 transition-colors duration-200 hover:text-accent"
                     >
                       <Phone
@@ -78,6 +81,8 @@ export default function KontakPage() {
                 <li>
                   <a
                     href="https://www.instagram.com/angkasaarchitects/"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="flex items-center gap-3 transition-colors duration-200 hover:text-accent"
                   >
                     <InstagramLogo size={18} className="shrink-0 text-accent" />

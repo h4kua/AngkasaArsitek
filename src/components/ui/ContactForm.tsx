@@ -8,28 +8,75 @@ interface ContactFormProps {
   serviceOptions: string[];
 }
 
+interface FormErrors {
+  name?: string;
+  email?: string;
+  location?: string;
+  message?: string;
+}
+
 const inputStyles =
   "rounded-xl border border-line/80 bg-surface-raised/60 px-4 py-3 text-sm text-paper placeholder:text-muted transition-colors duration-200 hover:border-muted focus:border-accent focus:outline-none";
+const inputErrorStyles = "border-danger focus:border-danger";
+
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactForm({
   whatsappNumber,
   serviceOptions,
 }: ContactFormProps) {
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
   const [projectType, setProjectType] = useState(serviceOptions[0]);
   const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function validate(): FormErrors {
+    const next: FormErrors = {};
+    if (!name.trim()) next.name = "Enter your name.";
+    if (!email.trim()) next.email = "Enter your email.";
+    else if (!EMAIL_PATTERN.test(email.trim()))
+      next.email = "Enter a valid email address.";
+    if (!location.trim()) next.location = "Enter the project location.";
+    if (!message.trim()) next.message = "Tell us a bit about the project.";
+    return next;
+  }
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const text = `Hello Angkasa Architects, my name is ${name}. I'm interested in ${projectType}. ${message}`;
-    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
-    window.open(url, "_blank", "noopener,noreferrer");
-    setSent(true);
-  };
+    const nextErrors = validate();
+    setErrors(nextErrors);
+    if (Object.keys(nextErrors).length > 0) {
+      setSent(false);
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const text = [
+        `Hello Angkasa Architects, my name is ${name}.`,
+        `Email: ${email}`,
+        `Project location: ${location}`,
+        `I'm interested in ${projectType}.`,
+        message,
+      ].join("\n");
+      const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(url, "_blank", "noopener,noreferrer");
+      setSent(true);
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  function clearError(field: keyof FormErrors) {
+    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+    <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-6">
       <div className="flex flex-col gap-2">
         <label htmlFor="name" className="text-sm font-medium">
           Name
@@ -37,12 +84,71 @@ export default function ContactForm({
         <input
           id="name"
           type="text"
-          required
           value={name}
-          onChange={(e) => setName(e.target.value)}
+          onChange={(e) => {
+            setName(e.target.value);
+            clearError("name");
+          }}
           placeholder="Your full name"
-          className={inputStyles}
+          aria-invalid={Boolean(errors.name)}
+          aria-describedby={errors.name ? "name-error" : undefined}
+          className={`${inputStyles} ${errors.name ? inputErrorStyles : ""}`}
         />
+        {errors.name && (
+          <p id="name-error" className="text-xs text-danger">
+            {errors.name}
+          </p>
+        )}
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <div className="flex flex-col gap-2">
+          <label htmlFor="email" className="text-sm font-medium">
+            Email
+          </label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              clearError("email");
+            }}
+            placeholder="you@email.com"
+            aria-invalid={Boolean(errors.email)}
+            aria-describedby={errors.email ? "email-error" : undefined}
+            className={`${inputStyles} ${errors.email ? inputErrorStyles : ""}`}
+          />
+          {errors.email && (
+            <p id="email-error" className="text-xs text-danger">
+              {errors.email}
+            </p>
+          )}
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <label htmlFor="location" className="text-sm font-medium">
+            Project Location
+          </label>
+          <input
+            id="location"
+            type="text"
+            value={location}
+            onChange={(e) => {
+              setLocation(e.target.value);
+              clearError("location");
+            }}
+            placeholder="City or site address"
+            aria-invalid={Boolean(errors.location)}
+            aria-describedby={errors.location ? "location-error" : undefined}
+            className={`${inputStyles} ${errors.location ? inputErrorStyles : ""}`}
+          />
+          {errors.location && (
+            <p id="location-error" className="text-xs text-danger">
+              {errors.location}
+            </p>
+          )}
+        </div>
       </div>
 
       <div className="flex flex-col gap-2">
@@ -76,20 +182,30 @@ export default function ContactForm({
         </label>
         <textarea
           id="message"
-          required
           rows={5}
           value={message}
-          onChange={(e) => setMessage(e.target.value)}
-          placeholder="Site location, approximate area, and an outline of what you need"
-          className={inputStyles}
+          onChange={(e) => {
+            setMessage(e.target.value);
+            clearError("message");
+          }}
+          placeholder="Approximate area and an outline of what you need"
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "message-error" : undefined}
+          className={`${inputStyles} ${errors.message ? inputErrorStyles : ""}`}
         />
+        {errors.message && (
+          <p id="message-error" className="text-xs text-danger">
+            {errors.message}
+          </p>
+        )}
       </div>
 
       <button
         type="submit"
-        className="group inline-flex w-fit items-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-medium text-on-accent shadow-[0_0_0_0_rgba(140,104,54,0)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim hover:shadow-[0_10px_32px_-8px_rgba(140,104,54,0.55)] active:translate-y-0 active:scale-[0.97]"
+        disabled={submitting}
+        className="group inline-flex w-fit items-center gap-2 rounded-xl bg-accent px-6 py-3.5 text-sm font-medium text-on-accent shadow-[0_0_0_0_rgba(140,104,54,0)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent-dim hover:shadow-[0_10px_32px_-8px_rgba(140,104,54,0.55)] active:translate-y-0 active:scale-[0.97] disabled:opacity-70"
       >
-        Send via WhatsApp
+        {submitting ? "Opening WhatsApp…" : "Send via WhatsApp"}
         <PaperPlaneTilt
           size={16}
           weight="bold"
@@ -98,7 +214,7 @@ export default function ContactForm({
       </button>
 
       {sent && (
-        <p className="text-sm text-muted">
+        <p role="status" className="text-sm text-muted">
           WhatsApp opened in a new tab with your message. Did not go through?
           Copy the message and send it to our number manually.
         </p>

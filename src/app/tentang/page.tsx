@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "About Us — Angkasa Architects",
   description:
     "Angkasa Architects was founded by Jeffri Angkasa and Indri Sisilia in 2015 in Pekanbaru, with a vision to design without boundaries.",
+  alternates: { canonical: "/tentang" },
 };
 
 export default function TentangPage() {
@@ -226,7 +227,7 @@ export default function TentangPage() {
         </div>
       </section>
 
-      <ClosingCta title="Want to talk through your project?" />
+      <ClosingCta eyebrow="Let's talk" title="Want to talk through your project?" />
     </>
   );
 }

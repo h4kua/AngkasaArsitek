@@ -7,12 +7,6 @@ const nextConfig: NextConfig = {
     // one asset where compression artifacts are actually visible, so 90 is
     // opted in explicitly here.
     qualities: [75, 90],
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "picsum.photos",
-      },
-    ],
   },
 };
 

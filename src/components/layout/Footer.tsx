@@ -98,6 +98,8 @@ export default function Footer() {
               <li>
                 <a
                   href={`https://wa.me/${company.phones[0].replace(/[^0-9]/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2.5 transition-colors duration-200 hover:text-accent"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line/70 transition-colors duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">
@@ -109,6 +111,8 @@ export default function Footer() {
               <li>
                 <a
                   href="https://www.instagram.com/angkasaarchitects/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group inline-flex items-center gap-2.5 transition-colors duration-200 hover:text-accent"
                 >
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-line/70 transition-colors duration-200 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">

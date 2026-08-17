@@ -1,15 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
+import { ArrowLeft } from "@phosphor-icons/react/dist/ssr";
 import ClosingCta from "@/components/ui/ClosingCta";
+import ProjectCard from "@/components/ui/ProjectCard";
 import ProjectImage from "@/components/ui/ProjectImage";
 import Reveal from "@/components/ui/Reveal";
 import { projects } from "@/lib/data";
+import { getRelatedProjects } from "@/lib/related-projects";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+/**
+ * Cycles large+small pairs with a full-width feature every third image, so
+ * the gallery reads as an edited sequence rather than a uniform grid. Loops
+ * regardless of how many images a project has.
+ */
+const GALLERY_PATTERN = [
+  {
+    span: "lg:col-span-7",
+    aspect: "aspect-[4/3]",
+    sizes: "(min-width: 1024px) 675px, calc(100vw - 48px)",
+  },
+  {
+    span: "lg:col-span-5",
+    aspect: "aspect-[4/3]",
+    sizes: "(min-width: 1024px) 470px, calc(100vw - 48px)",
+  },
+  {
+    span: "lg:col-span-12",
+    aspect: "aspect-[21/9]",
+    sizes: "(min-width: 1024px) 1170px, calc(100vw - 48px)",
+  },
+] as const;
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -20,21 +45,29 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = projects.find((p) => p.slug === slug);
-  if (!project) return {};
+  if (!project) {
+    return {
+      title: "Page Not Found — Angkasa Architects",
+      robots: { index: false, follow: false },
+    };
+  }
   return {
     title: `${project.name} — Angkasa Architects`,
     description: project.summary,
+    alternates: { canonical: `/karya/${project.slug}` },
+    openGraph: project.images[0]
+      ? { images: [project.images[0]] }
+      : undefined,
   };
 }
 
 export default async function ProjectDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const index = projects.findIndex((p) => p.slug === slug);
-  const project = projects[index];
+  const project = projects.find((p) => p.slug === slug);
 
   if (!project) notFound();
 
-  const next = projects[(index + 1) % projects.length];
+  const related = getRelatedProjects(project, projects);
 
   return (
     <>
@@ -180,58 +213,68 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
       {project.images.length > 1 && (
         <section className="mx-auto max-w-[1400px] px-6 pb-24 lg:px-10">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-            {project.images.slice(1).map((src, i) => (
-              <Reveal
-                key={src}
-                delay={i * 0.06}
-                className="group relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line/70 bg-surface shadow-[0_18px_40px_-26px_rgba(42,37,32,0.35)]"
-              >
-                <ProjectImage
-                  src={src}
-                  alt={`${project.name} — detail ${i + 1}`}
-                  width={1000}
-                  height={750}
-                  sizes="(min-width: 1024px) 670px, (min-width: 640px) 48vw, calc(100vw - 48px)"
-                  className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
-                />
-              </Reveal>
-            ))}
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+            {project.images.slice(1).map((src, i) => {
+              const { span, aspect, sizes } =
+                GALLERY_PATTERN[i % GALLERY_PATTERN.length];
+              return (
+                <Reveal
+                  key={src}
+                  delay={i * 0.06}
+                  className={`group relative w-full overflow-hidden rounded-2xl border border-line/70 bg-surface shadow-[0_18px_40px_-26px_rgba(42,37,32,0.35)] ${aspect} ${span}`}
+                >
+                  <ProjectImage
+                    src={src}
+                    alt={`${project.name} — detail ${i + 1}`}
+                    width={1400}
+                    height={800}
+                    sizes={sizes}
+                    className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </Reveal>
+              );
+            })}
           </div>
         </section>
       )}
 
-      {/* Next project */}
-      <section className="border-t border-line/70">
-        <Link
-          href={`/karya/${next.slug}`}
-          className="group mx-auto flex max-w-[1400px] items-center gap-6 px-6 py-10 lg:px-10"
-        >
-          <div className="relative aspect-[4/3] w-24 shrink-0 overflow-hidden rounded-xl border border-line/70 bg-surface sm:w-32">
-            <ProjectImage
-              src={next.images[0]}
-              alt={next.name}
-              width={300}
-              height={225}
-              sizes="(min-width: 640px) 128px, 96px"
-              className="h-full w-full transition-transform duration-700 ease-out group-hover:scale-105"
-            />
-          </div>
-          <div className="min-w-0 flex-1">
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-muted">
-              Next project
-            </p>
-            <p className="mt-2 truncate font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-              {next.name}
-            </p>
-          </div>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line/70 text-muted transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:border-accent group-hover:bg-accent group-hover:text-on-accent">
-            <ArrowUpRight size={20} weight="bold" />
-          </span>
-        </Link>
-      </section>
+      {/* Related projects */}
+      {related.length > 0 && (
+        <section className="border-t border-line/70 bg-surface">
+          <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-24">
+            <Reveal direction="left">
+              <div className="flex items-center gap-3">
+                <span className="h-px w-9 bg-accent" aria-hidden />
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                  Related Projects
+                </p>
+              </div>
+              <h2 className="mt-4 max-w-[24ch] font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+                {related.every((p) => p.category === project.category)
+                  ? `More ${project.category.toLowerCase()} work.`
+                  : "More from Angkasa Architects."}
+              </h2>
+            </Reveal>
 
-      <ClosingCta title="Have a site and a similar idea?" />
+            <div className="mt-10 grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+              {related.map((p, i) => (
+                <Reveal
+                  key={p.slug}
+                  direction={i === 0 ? "left" : i === 2 ? "right" : "up"}
+                  delay={i * 0.06}
+                >
+                  <ProjectCard project={p} />
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <ClosingCta
+        eyebrow="Similar vision?"
+        title="Have a site and a similar idea?"
+      />
     </>
   );
 }

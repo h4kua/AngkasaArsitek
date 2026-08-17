@@ -23,13 +23,14 @@ export default function ProjectsGrid({ projects }: ProjectsGridProps) {
 
   return (
     <div>
-      <div className="flex flex-wrap justify-center gap-3">
+      <div className="flex gap-3 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0">
         {(["All", ...categories] as const).map((cat) => (
           <button
             key={cat}
             type="button"
+            aria-pressed={active === cat}
             onClick={() => setActive(cat)}
-            className={`relative overflow-hidden border px-4 py-2 text-sm font-medium transition-colors duration-200 active:scale-[0.97] ${
+            className={`relative shrink-0 overflow-hidden border px-4 py-2 text-sm font-medium transition-colors duration-200 active:scale-[0.97] ${
               active === cat
                 ? "border-accent text-paper"
                 : "border-line text-muted hover:border-paper hover:text-paper"

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { List, X, ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 
@@ -26,12 +26,25 @@ export default function Nav() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const reduce = useReducedMotion();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
 
   return (
     <header className="sticky top-3 z-50 px-3 sm:top-4 sm:px-4 lg:top-5 lg:px-6">
       <div className="mx-auto max-w-[1400px]">
         <div
-          className={`flex h-[64px] items-center justify-between border border-line/70 bg-surface-raised/80 px-5 shadow-[0_16px_44px_-22px_rgba(42,37,32,0.35)] backdrop-blur-xl transition-[border-radius] duration-300 sm:px-6 lg:px-8 ${
+          className={`flex h-[60px] items-center justify-between border border-line/70 bg-surface-raised/80 px-5 shadow-[0_16px_44px_-22px_rgba(42,37,32,0.35)] backdrop-blur-xl transition-[border-radius] duration-300 sm:px-6 lg:px-8 ${
             open ? "rounded-t-2xl" : "rounded-2xl"
           }`}
         >
@@ -75,8 +88,11 @@ export default function Nav() {
           </nav>
 
           <button
+            ref={toggleRef}
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
             onClick={() => setOpen((v) => !v)}
             className="relative z-10 -mr-2.5 flex h-11 w-11 items-center justify-center rounded-full text-paper transition-colors duration-200 hover:bg-line/40 lg:hidden"
           >
@@ -98,13 +114,14 @@ export default function Nav() {
         <AnimatePresence initial={false}>
           {open && (
             <motion.nav
+              id="mobile-menu"
               initial={reduce ? false : { height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={reduce ? undefined : { height: 0, opacity: 0 }}
               transition={{ duration: 0.35, ease: EASE }}
               className="overflow-hidden rounded-b-2xl border-x border-b border-line/70 bg-surface-raised/95 shadow-[0_16px_44px_-22px_rgba(42,37,32,0.35)] backdrop-blur-xl lg:hidden"
             >
-              <ul className="flex flex-col gap-5 px-6 py-6">
+              <ul className="flex flex-col px-6 py-2">
                 {links.map((link, i) => (
                   <motion.li
                     key={link.href}
@@ -115,7 +132,7 @@ export default function Nav() {
                     <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className={`font-display text-lg font-medium ${
+                      className={`flex min-h-11 items-center font-display text-lg font-medium ${
                         pathname === link.href ? "text-paper" : "text-muted"
                       }`}
                     >
@@ -124,6 +141,7 @@ export default function Nav() {
                   </motion.li>
                 ))}
                 <motion.li
+                  className="mt-3 mb-2"
                   initial={reduce ? false : { opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3, delay: links.length * 0.04 }}
@@ -131,7 +149,7 @@ export default function Nav() {
                   <Link
                     href="/kontak"
                     onClick={() => setOpen(false)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent"
+                    className="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-on-accent"
                   >
                     Contact Us
                     <ArrowUpRight size={14} weight="bold" />

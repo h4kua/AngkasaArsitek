@@ -231,7 +231,10 @@ export default function Home() {
         </div>
       </StackSection>
 
-      <ClosingCta title="Let us shape your space together." />
+      <ClosingCta
+        eyebrow="Have a project in mind?"
+        title="Let us shape your space together."
+      />
     </>
   );
 }

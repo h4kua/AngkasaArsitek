@@ -18,6 +18,10 @@
   --color-forest: #3a4a34;
   --color-sage: #9caa8c;
   --color-sky: #c9d6dc;
+
+  /* Brick red rather than a stock UI red -- stays inside the warm/earth
+     family so a form error doesn't read as a different product's palette. */
+  --color-danger: #a13a2f;
 }
 
 @theme inline {
@@ -33,6 +37,7 @@
   --color-forest: var(--color-forest);
   --color-sage: var(--color-sage);
   --color-sky: var(--color-sky);
+  --color-danger: var(--color-danger);
 
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-jakarta);
