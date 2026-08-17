@@ -27,14 +27,16 @@ const siteName = "Angkasa Architects";
 const siteDescription =
   "Angkasa Architects has designed houses, commercial and public buildings from Pekanbaru since 2015. We create space for a better place.";
 
+const siteTitle = `${siteName} — Architecture Studio in Pekanbaru`;
+
 export const metadata: Metadata = {
   title: {
-    default: `${siteName} — Biro Arsitektur Pekanbaru`,
+    default: siteTitle,
     template: `%s`,
   },
   description: siteDescription,
   openGraph: {
-    title: `${siteName} — Biro Arsitektur Pekanbaru`,
+    title: siteTitle,
     description: siteDescription,
     siteName,
     locale: "en_US",
@@ -42,7 +44,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary",
-    title: `${siteName} — Biro Arsitektur Pekanbaru`,
+    title: siteTitle,
     description: siteDescription,
   },
 };

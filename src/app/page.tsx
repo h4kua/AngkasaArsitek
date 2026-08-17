@@ -17,7 +17,7 @@ const featuredSlugs = [
   "cassaville",
   "marco-revy-house",
   "sariputta-buddhist-school",
-  "ochado-cafe",
+  "ad-house",
 ];
 const featuredProjects = featuredSlugs
   .map((slug) => projects.find((p) => p.slug === slug))
@@ -106,7 +106,6 @@ export default function Home() {
               <div className="relative aspect-[16/7] w-full overflow-hidden bg-surface">
                 <ProjectImage
                   src={heroProject.images[0]}
-                  seed={heroProject.imageSeed}
                   alt={`${heroProject.name}, ${heroProject.category} in ${heroProject.location}`}
                   width={1600}
                   height={700}
@@ -173,7 +172,6 @@ export default function Home() {
                   >
                     <ProjectImage
                       src={p.images[0]}
-                      seed={p.imageSeed}
                       alt={p.name}
                       width={600}
                       height={600}

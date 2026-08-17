@@ -63,7 +63,6 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <Reveal className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line/70 bg-surface shadow-[0_24px_60px_-32px_rgba(42,37,32,0.4)]">
           <ProjectImage
             src={project.images[0]}
-            seed={project.imageSeed}
             alt={`${project.name}, ${project.category} in ${project.location}`}
             width={1600}
             height={900}
@@ -211,7 +210,6 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <div className="relative aspect-[4/3] w-24 shrink-0 overflow-hidden rounded-xl border border-line/70 bg-surface sm:w-32">
             <ProjectImage
               src={next.images[0]}
-              seed={next.imageSeed}
               alt={next.name}
               width={300}
               height={225}

@@ -17,7 +17,6 @@ export default function ProjectCard({ project, priority = false }: ProjectCardPr
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-surface">
         <ProjectImage
           src={project.images[0]}
-          seed={project.imageSeed}
           alt={`${project.name}, ${project.category} in ${project.location}`}
           width={1200}
           height={900}

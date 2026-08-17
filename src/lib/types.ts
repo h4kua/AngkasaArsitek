@@ -78,8 +78,6 @@ export interface Project {
   source: ProjectSource;
   /** Absolute https URLs from Angkasa's own media library. */
   images: string[];
-  /** Legacy picsum seed, used only where no real photography exists yet. */
-  imageSeed?: string;
 }
 
 export interface Founder {

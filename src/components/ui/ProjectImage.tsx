@@ -4,10 +4,8 @@ import { useCallback, useState } from "react";
 import Image from "next/image";
 
 interface ProjectImageProps {
-  /** Real photography from Angkasa's media library. Wins when present. */
+  /** Real photography from Angkasa's media library. */
   src?: string;
-  /** picsum seed, used only for records with no real photography yet. */
-  seed?: string;
   alt: string;
   width: number;
   height: number;
@@ -23,7 +21,6 @@ interface ProjectImageProps {
 
 export default function ProjectImage({
   src,
-  seed,
   alt,
   width,
   height,
@@ -41,21 +38,19 @@ export default function ProjectImage({
     if (node?.complete && node.naturalWidth > 0) setLoaded(true);
   }, []);
 
-  const resolved = src ?? (seed ? `https://picsum.photos/seed/${seed}/${width}/${height}` : null);
-
-  // No source at all, or the remote host failed. Either way the old behaviour
-  // left the fade gate closed forever and rendered a silent blank card; this
-  // degrades to a visible, on-brand placeholder instead.
-  if (!resolved || failed) {
+  // No source at all (photography not yet supplied), or the remote host
+  // failed. Either way, degrade to a visible, honest placeholder rather than
+  // a silent blank card or an unrelated stock photo.
+  if (!src || failed) {
     return (
       <div
         role="img"
-        aria-label={`${alt} (image unavailable)`}
+        aria-label={`${alt} (photography not yet available)`}
         className={`relative flex items-center justify-center overflow-hidden bg-surface ${className}`}
       >
         <div className="blueprint-grid absolute inset-0 opacity-40" aria-hidden />
         <span className="relative px-4 text-center font-mono text-[10px] uppercase tracking-[0.18em] text-muted">
-          Image unavailable
+          Photography coming soon
         </span>
       </div>
     );
@@ -68,7 +63,7 @@ export default function ProjectImage({
   return (
     <Image
       ref={captureRef}
-      src={resolved}
+      src={src}
       alt={alt}
       width={width}
       height={height}

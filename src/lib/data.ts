@@ -797,7 +797,6 @@ export const projects: Project[] = [
       "Designed for Arief Muhammad and Tia Pangestika, AT House takes a deconstructivist approach marked by sharp lines, dynamic tilted massing and a cantilever that appears to float. Drawing on the owners' love of gardening, the planting is functional as well as decorative — chosen so it can be harvested for everyday cooking. On a plot of roughly 200 m² it still accommodates a swimming pool, generous open space, a rooftop garden and an underground garage serving as a gallery for the owner's classic car collection.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-at-house-facade",
   },
   {
     slug: "l-house",
@@ -811,7 +810,6 @@ export const projects: Project[] = [
       "L House presents a geometrically patterned timber lattice facade that filters light while giving the building its visual identity. In the rear garden, a swimming pool with a waterfall wall sits among dense tropical planting, framed by full-height glass that dissolves the boundary between inside and out.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-l-house-facade",
   },
   {
     slug: "g-house",
@@ -825,7 +823,6 @@ export const projects: Project[] = [
       "G House wraps its facade in warm vertical timber, framing a family swimming pool with a waterfall wall among mature trees. The outdoor space is designed as an extension of the family room — a place for children to play and for the household to gather in shade through the day.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-g-house-facade",
   },
   {
     slug: "ska-mall-extension",
@@ -838,7 +835,6 @@ export const projects: Project[] = [
       "An extension to SKA Mall designed so the new cinema area connects seamlessly with the existing visitor flow, while giving the addition its own facade identity as a marker of the new wing.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-ska-mall-extension",
   },
   {
     slug: "ochado-cafe",
@@ -850,7 +846,6 @@ export const projects: Project[] = [
       "Ochado Cafe blurs the boundary between the interior and the terrace with full folding openings, letting the cafe spill into the outdoor space during peak hours.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-ochado-cafe",
   },
   {
     slug: "p-villas",
@@ -862,7 +857,6 @@ export const projects: Project[] = [
       "P Villas follows the contours of its hillside site in West Sumatra rather than levelling them, so each unit gains a different orientation and view while remaining private from its neighbours.",
     source: "instagram",
     images: [],
-    imageSeed: "angkasa-p-villas",
   },
 ];
 
