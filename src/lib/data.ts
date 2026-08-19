@@ -28,7 +28,7 @@ export const company = {
   founded: 2015,
   motto: "We create space for a better place.",
   hashtag: "#TerbangBersamaAngkasa",
-  address: "Jl. Muhammad Yamin No. 47, Pekanbaru, Riau",
+  address: "Jl. Muhammad Yamin No. 47, Sukaramai, Pekanbaru Kota, Pekanbaru, Riau 28155",
   email: "angkasaarchitects@gmail.com",
   phones: ["+62 811-7579-668", "+62 818-0690-2904"],
   instagram: "@angkasaarchitects",
