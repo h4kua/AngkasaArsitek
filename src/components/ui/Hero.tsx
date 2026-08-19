@@ -100,15 +100,7 @@ export default function Hero() {
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.15, ease: EASE }}
-              className="flex items-center gap-3"
             >
-              <motion.span
-                aria-hidden
-                initial={reduce ? false : { scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
-                className="h-px w-12 origin-left bg-accent"
-              />
               <p className="font-mono text-[11px] uppercase tracking-[0.26em] text-paper/70 sm:text-xs">
                 Angkasa Architects · Since 2015
               </p>

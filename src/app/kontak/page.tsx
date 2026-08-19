@@ -41,12 +41,9 @@ export default function KontakPage() {
 
           <Reveal direction="right" delay={0.1} className="flex flex-col gap-8">
             <div className="rounded-2xl border border-line/70 bg-surface-raised/70 p-6">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-9 bg-accent" aria-hidden />
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                  Direct Contact
-                </p>
-              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                Direct Contact
+              </p>
               <ul className="mt-5 flex flex-col gap-4 text-sm">
                 <li className="flex items-start gap-3">
                   <MapPin size={18} className="mt-0.5 shrink-0 text-accent" />
@@ -110,12 +107,9 @@ export default function KontakPage() {
       <section className="border-t border-line/70 bg-surface">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-12 px-6 py-16 lg:grid-cols-2 lg:gap-20 lg:px-10 lg:py-20">
           <Reveal direction="left">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Before You Reach Out
-              </h2>
-            </div>
+            <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Before You Reach Out
+            </h2>
             <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-muted">
               None of this is required, but these four make the first consultation
               far more productive — we can get straight to design possibilities
@@ -161,12 +155,9 @@ export default function KontakPage() {
           </Reveal>
 
           <Reveal direction="right" delay={0.08}>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Where We Work
-              </h2>
-            </div>
+            <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Where We Work
+            </h2>
             <p className="mt-5 max-w-[52ch] text-base leading-relaxed text-muted">
               Our studio is in Pekanbaru, but our built work spans{" "}
               {company.cities.length} cities. For projects outside the city,

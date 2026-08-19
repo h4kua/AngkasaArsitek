@@ -115,12 +115,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
 
             {project.strategies && project.strategies.length > 0 && (
               <div className="mt-10 border-t border-line/70 pt-8">
-                <div className="flex items-center gap-3">
-                  <span className="h-px w-9 bg-accent" aria-hidden />
-                  <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                    Design Strategy
-                  </h2>
-                </div>
+                <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                  Design Strategy
+                </h2>
                 <ul className="mt-6 max-w-[62ch] space-y-4">
                   {project.strategies.map((item, i) => (
                     <li key={item} className="flex gap-4">
@@ -243,12 +240,9 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         <section className="border-t border-line/70 bg-surface">
           <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-24">
             <Reveal direction="left">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-9 bg-accent" aria-hidden />
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                  Related Projects
-                </p>
-              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                Related Projects
+              </p>
               <h2 className="mt-4 max-w-[24ch] font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
                 {related.every((p) => p.category === project.category)
                   ? `More ${project.category.toLowerCase()} work.`

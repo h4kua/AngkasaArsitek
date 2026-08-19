@@ -191,12 +191,9 @@ export default function Home() {
 
             {/* Text column */}
             <Reveal direction="right" className="flex flex-col justify-center">
-              <div className="flex items-center gap-3">
-                <span className="h-px w-9 bg-accent" aria-hidden />
-                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                  About Us
-                </p>
-              </div>
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                About Us
+              </p>
               <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
                 Two architects, one studio.
               </h2>

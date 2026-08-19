@@ -21,12 +21,9 @@ export default function SectionIntro({
   return (
     <div className={`${isLeft ? "" : "mx-auto max-w-2xl text-center"} ${className}`}>
       {label && (
-        <div className={`mb-4 flex items-center gap-3 ${isLeft ? "" : "justify-center"}`}>
-          <span className="h-px w-9 bg-accent" aria-hidden />
-          <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-            {label}
-          </p>
-        </div>
+        <p className="mb-4 font-mono text-xs uppercase tracking-[0.22em] text-accent">
+          {label}
+        </p>
       )}
       <h2
         className={`font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl ${

@@ -70,12 +70,9 @@ export default function TentangPage() {
                 delay={0.1}
                 className="flex flex-col justify-center text-center lg:text-left"
               >
-                <div className="flex items-center justify-center gap-3 lg:justify-start">
-                  <span className="h-px w-9 bg-accent" aria-hidden />
-                  <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                    {founder.role}
-                  </p>
-                </div>
+                <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+                  {founder.role}
+                </p>
                 <h2 className="mt-4 font-display text-3xl font-semibold tracking-tight sm:text-4xl">
                   {founder.name}
                 </h2>
@@ -100,13 +97,9 @@ export default function TentangPage() {
       {/* Milestones */}
       <section className="mx-auto max-w-[1400px] px-6 pb-24 lg:px-10">
         <Reveal direction="left">
-          <div className="flex items-center justify-center gap-3">
-            <span className="h-px w-9 bg-accent" aria-hidden />
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-              History
-            </p>
-            <span className="h-px w-9 bg-accent" aria-hidden />
-          </div>
+          <p className="text-center font-mono text-xs uppercase tracking-[0.22em] text-accent">
+            History
+          </p>
           <h2 className="mt-4 text-center font-display text-3xl font-semibold tracking-tight sm:text-4xl">
             From 2015 to today.
           </h2>
@@ -151,12 +144,9 @@ export default function TentangPage() {
       <section className="border-y border-line/70 bg-surface">
         <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-14 px-6 py-20 lg:grid-cols-[1fr_1fr] lg:gap-20 lg:px-10">
           <Reveal direction="left">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Our Team
-              </h2>
-            </div>
+            <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Our Team
+            </h2>
             <ul className="mt-8 grid grid-cols-2 gap-x-5 gap-y-8 sm:grid-cols-3">
               {team.map((member) => (
                 <li key={member.name}>
@@ -180,12 +170,9 @@ export default function TentangPage() {
               ))}
             </ul>
 
-            <div className="mt-12 flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Achievements
-              </h2>
-            </div>
+            <h2 className="mt-12 font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Achievements
+            </h2>
             <ul className="mt-6 space-y-4">
               {achievements.map((item) => (
                 <li key={item} className="flex gap-4">
@@ -202,12 +189,9 @@ export default function TentangPage() {
           </Reveal>
 
           <Reveal direction="right" delay={0.08}>
-            <div className="flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Our Clients
-              </h2>
-            </div>
+            <h2 className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Our Clients
+            </h2>
             <p className="mt-5 max-w-[48ch] text-base leading-relaxed text-muted">
               We have built nationwide, from Pekanbaru to Jakarta, Bali,
               Surabaya and Medan — for private owners, developers and public

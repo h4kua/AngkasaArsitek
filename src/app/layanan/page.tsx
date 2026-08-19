@@ -74,12 +74,9 @@ export default function LayananPage() {
       <section className="border-y border-line/70 bg-surface">
         <div className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-24">
           <Reveal direction="left">
-            <div className="flex items-center gap-3">
-              <span className="h-px w-9 bg-accent" aria-hidden />
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                Process
-              </p>
-            </div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+              Process
+            </p>
             <h2 className="mt-4 max-w-[20ch] font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
               Five stages, from first conversation to handover.
             </h2>
@@ -125,12 +122,9 @@ export default function LayananPage() {
       {/* FAQ — native disclosure, works without JS and is keyboard-accessible */}
       <section className="mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-24">
         <Reveal direction="left">
-          <div className="flex items-center gap-3">
-            <span className="h-px w-9 bg-accent" aria-hidden />
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-              Frequently Asked
-            </p>
-          </div>
+          <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
+            Frequently Asked
+          </p>
           <h2 className="mt-4 max-w-[18ch] font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
             The questions we get most.
           </h2>
