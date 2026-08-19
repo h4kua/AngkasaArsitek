@@ -5,11 +5,9 @@ import ProjectCard from "@/components/ui/ProjectCard";
 import ProjectImage from "@/components/ui/ProjectImage";
 import Reveal from "@/components/ui/Reveal";
 import SectionIntro from "@/components/ui/SectionIntro";
-import StackSection from "@/components/ui/StackSection";
 import StatStrip from "@/components/ui/StatStrip";
-import Button from "@/components/ui/Button";
 import Hero from "@/components/ui/Hero";
-import { company, founders, projects, services, stats } from "@/lib/data";
+import { projects, services, stats } from "@/lib/data";
 
 const featuredSlugs = [
   "ci-house",
@@ -156,77 +154,6 @@ export default function Home() {
           })}
         </div>
       </section>
-
-      {/* Manifesto / About teaser */}
-      <StackSection className="z-10 border-t border-b border-line bg-surface">
-        <div className="blueprint-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden />
-        <div className="relative mx-auto max-w-[1400px] px-6 py-20 lg:px-10 lg:py-28">
-          <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
-            {/* Project mosaic */}
-            <Reveal direction="left" className="relative">
-              <div className="grid grid-cols-2 gap-2">
-                {featuredProjects.slice(0, 4).map((p) => (
-                  <div
-                    key={p.slug}
-                    className="relative aspect-square overflow-hidden bg-surface"
-                  >
-                    <ProjectImage
-                      src={p.images[0]}
-                      alt={p.name}
-                      width={600}
-                      height={600}
-                      sizes="(min-width: 1024px) 340px, 45vw"
-                      className="h-full w-full transition-transform duration-700 ease-out hover:scale-105"
-                    />
-                  </div>
-                ))}
-              </div>
-              <div className="absolute -bottom-4 -right-4 border border-line bg-ink px-5 py-4 lg:-bottom-6 lg:-right-6">
-                <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-accent">Founded</p>
-                <p className="font-display text-3xl font-extrabold tracking-tight text-paper">
-                  {company.founded}
-                </p>
-              </div>
-            </Reveal>
-
-            {/* Text column */}
-            <Reveal direction="right" className="flex flex-col justify-center">
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-accent">
-                About Us
-              </p>
-              <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-                Two architects, one studio.
-              </h2>
-              <blockquote className="mt-6 border-l-2 border-accent pl-5">
-                <p className="font-display text-lg italic leading-relaxed text-paper/80">
-                  &ldquo;{company.motto}&rdquo;
-                </p>
-              </blockquote>
-              <p className="mt-6 max-w-[55ch] text-base leading-relaxed text-muted">
-                Jeffri brought years of experience from a Singapore-based
-                architecture firm; Indri came from heading development at a
-                Pekanbaru property company. They hold distinct views on design
-                aesthetics but, like yin and yang, they complement each other —
-                a pairing the studio credits for the unique, bold and
-                unexpected outcomes in its work since {company.founded}.
-              </p>
-              <div className="mt-4 flex flex-wrap gap-4">
-                {founders.map((f) => (
-                  <div key={f.name} className="border-t border-line pt-3 pr-8">
-                    <p className="text-sm font-semibold text-paper">{f.name.split(",")[0]}</p>
-                    <p className="text-xs text-muted">{f.role}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-8">
-                <Button href="/tentang" variant="ghost">
-                  About Us
-                </Button>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </StackSection>
 
       <ClosingCta
         eyebrow="Have a project in mind?"
